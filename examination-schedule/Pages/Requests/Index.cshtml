@@ -5,30 +5,21 @@
     // ViewData["Title"] = "Index";
 }
 
-@* <link rel="stylesheet" href="~/css/style.css" type="text/css" />
+<link rel="stylesheet" href="~/css/style.css" type="text/css" />
 
-<h1>Index</h1> *@
-@* 
-<p>
+<h1>Requests</h1>
+
+@* <p>
     <a asp-page="Create">Create New</a>
-</p>
-<div class="searchDiv">
+</p> *@
+<div class="searchDiv"> 
     <form method="get">
-        <label>ID</label>
-        <input type="text"
-               name="id"
-               value="@Model.PostId"
-               asp-for="@Model.PostId" />
-        <label>Title</label>
-        <input type="text"
-               name="title"
-               value="@Model.Title"
-               asp-for="@Model.Title" />
-        <label>Description</label>
-        <input type="text"
-               name="description"
-               value="@Model.Description"
-               asp-for="@Model.Description" />
+        <label>From</label>
+        <input type="datetime" name="from" value="@Model.From" asp-for="@Model.From" />
+        <label>To</label>
+        <input type="datetime" name="to" value="@Model.To" asp-for="@Model.To" />
+        <label>Doctor ID</label>
+        <input type="text" name="doctorId" value="@Model.DoctorId" asp-for="@Model.DoctorId" />
         <button type="submit" asp-page="./Index">Submit</button>
     </form>
 </div>
@@ -36,122 +27,139 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Post[0].CreatedDate)
+                @Html.DisplayNameFor(model => model.Requests[0].Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Post[0].UpdatedDate)
+                @Html.DisplayNameFor(model => model.Requests[0].Doctor)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Post[0].Title)
+                @Html.DisplayNameFor(model => model.Requests[0].Patient)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Post[0].Content)
+                @Html.DisplayNameFor(model => model.Requests[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Post[0].PublishStatus)
+                @Html.DisplayNameFor(model => model.Requests[0].Room)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Post[0].Author)
+                @Html.DisplayNameFor(model => model.Requests[0].TimeSlot)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Post[0].Category)
+                @Html.DisplayNameFor(model => model.Requests[0].Staff)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Post)
+        @foreach (var item in Model.Requests)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                    @{
+                        string date = item.Date.ToString().Substring(0, 10);
+                    }
+                    @Html.DisplayFor(modelItem => date)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                    @{
+                        string doctorFullName = item.Doctor.UsernameNavigation.FirstName + " " +
+                        item.Doctor.UsernameNavigation.LastName;
+                    }
+                    @Html.DisplayFor(modelItem => doctorFullName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Title)
+                    @{
+                        string patientFullName = item.Patient.UsernameNavigation.FirstName + " " +
+                        item.Patient.UsernameNavigation.LastName;
+                    }
+                    @Html.DisplayFor(modelItem => patientFullName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Content)
+                    @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PublishStatus)
+                    @Html.DisplayFor(modelItem => item.Room.RoomName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Author.UserId)
+                    @{
+                        string timeSlotInfo = item.TimeSlot.StartTime + " - " + item.TimeSlot.EndTime;
+                    }
+                    @Html.DisplayFor(modelItem => timeSlotInfo)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Category.CategoryId)
+                    @{
+                        string staffFullName = item.Staff.UsernameNavigation.FirstName + " " +
+                        item.Staff.UsernameNavigation.LastName;
+                    }
+                    @Html.DisplayFor(modelItem => staffFullName)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.PostId">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.PostId">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.PostId">Delete</a>
+                    @* <a asp-page="./Edit" asp-route-id="@item.PostId">Edit</a> *@ |
+                    <a asp-page="./Details" asp-route-id="@item.EventId">Details</a> |
+                    @* <a asp-page="./Delete" asp-route-id="@item.PostId">Delete</a> *@
                 </td>
             </tr>
         }
     </tbody>
-</table> *@
+</table>
 
-@*PAGINATION*@
-@* <div>
-    <ul class="pagination">
-        @if (Model.PageNumber != 1)
-        {
-            <li class="page-item @(Model.PageNumber == 1 ? "active" : "")">
-                <a asp-route-pageNumber="1"
-                   asp-route-id="@Model.PostId"
-                   asp-route-title="@Model.Title"
-                   asp-route-description="@Model.Description"
-                   asp-page="./Index">
-                    First
-                </a>
-            </li>
-            <li class="page-item @(Model.PageNumber == 1 ? "active" : "")">
-                <a asp-route-pageNumber="@(Model.PageNumber - 1)"
-                   asp-route-id="@Model.PostId"
-                   asp-route-title="@Model.Title"
-                   asp-route-description="@Model.Description"
-                   asp-page="./Index">
-                    Prev
-                </a>
-            </li>
-        }
-        @for (int i = 1; i <= Model.TotalPage; i++)
-        {
-            <li class="page-item @(Model.PageNumber == i ? "active" : "")">
-                <a class="page-link"
-                   asp-route-id="@Model.PostId"
-                   asp-route-title="@Model.Title"
-                   asp-route-description="@Model.Description"
-                   asp-page="./Index"
-                   asp-route-pageNumber="@i">
-                    @i
-                </a>
-            </li>
-        }
-        @if (Model.PageNumber != Model.TotalPage)
-        {
-            <li class="page-item @(Model.PageNumber == Model.TotalPage ? "active" : "")">
-                <a asp-route-pageNumber="@(Model.PageNumber + 1)"
-                   asp-route-id="@Model.PostId"
-                   asp-route-title="@Model.Title"
-                   asp-route-description="@Model.Description"
-                   asp-page="./Index">
-                    Next
-                </a>
-            </li>
-            <li class="page-item @(Model.PageNumber == Model.TotalPage ? "active" : "")">
-                <a asp-route-pageNumber="@(Model.TotalPage)"
-                   asp-route-id="@Model.PostId"
-                   asp-route-title="@Model.Title"
-                   asp-route-description="@Model.Description"
-                   asp-page="./Index">
-                    Last
-                </a>
-            </li>
-        }
-    </ul>
-</div>
- *@
+<style>
+    @* SEARCH FORM *@
+    .searchDiv {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 800px;
+        margin: 0 auto;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .searchDiv form {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .searchDiv label {
+        margin-right: 10px;
+        font-weight: bold;
+    }
+    .searchDiv input {
+        margin-right: 20px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .searchDiv button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .searchDiv button:hover {
+        background-color: #0056b3;
+    }   
+
+    @* TABLE *@
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>

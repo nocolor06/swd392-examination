@@ -1,0 +1,157 @@
+﻿@page
+@model examination_schedule.Pages.Requests.IndexModel
+
+@{
+    // ViewData["Title"] = "Index";
+}
+
+@* <link rel="stylesheet" href="~/css/style.css" type="text/css" />
+
+<h1>Index</h1> *@
+@* 
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<div class="searchDiv">
+    <form method="get">
+        <label>ID</label>
+        <input type="text"
+               name="id"
+               value="@Model.PostId"
+               asp-for="@Model.PostId" />
+        <label>Title</label>
+        <input type="text"
+               name="title"
+               value="@Model.Title"
+               asp-for="@Model.Title" />
+        <label>Description</label>
+        <input type="text"
+               name="description"
+               value="@Model.Description"
+               asp-for="@Model.Description" />
+        <button type="submit" asp-page="./Index">Submit</button>
+    </form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].PublishStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Post[0].Category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Post)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublishStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryId)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.PostId">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.PostId">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.PostId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> *@
+
+@*PAGINATION*@
+@* <div>
+    <ul class="pagination">
+        @if (Model.PageNumber != 1)
+        {
+            <li class="page-item @(Model.PageNumber == 1 ? "active" : "")">
+                <a asp-route-pageNumber="1"
+                   asp-route-id="@Model.PostId"
+                   asp-route-title="@Model.Title"
+                   asp-route-description="@Model.Description"
+                   asp-page="./Index">
+                    First
+                </a>
+            </li>
+            <li class="page-item @(Model.PageNumber == 1 ? "active" : "")">
+                <a asp-route-pageNumber="@(Model.PageNumber - 1)"
+                   asp-route-id="@Model.PostId"
+                   asp-route-title="@Model.Title"
+                   asp-route-description="@Model.Description"
+                   asp-page="./Index">
+                    Prev
+                </a>
+            </li>
+        }
+        @for (int i = 1; i <= Model.TotalPage; i++)
+        {
+            <li class="page-item @(Model.PageNumber == i ? "active" : "")">
+                <a class="page-link"
+                   asp-route-id="@Model.PostId"
+                   asp-route-title="@Model.Title"
+                   asp-route-description="@Model.Description"
+                   asp-page="./Index"
+                   asp-route-pageNumber="@i">
+                    @i
+                </a>
+            </li>
+        }
+        @if (Model.PageNumber != Model.TotalPage)
+        {
+            <li class="page-item @(Model.PageNumber == Model.TotalPage ? "active" : "")">
+                <a asp-route-pageNumber="@(Model.PageNumber + 1)"
+                   asp-route-id="@Model.PostId"
+                   asp-route-title="@Model.Title"
+                   asp-route-description="@Model.Description"
+                   asp-page="./Index">
+                    Next
+                </a>
+            </li>
+            <li class="page-item @(Model.PageNumber == Model.TotalPage ? "active" : "")">
+                <a asp-route-pageNumber="@(Model.TotalPage)"
+                   asp-route-id="@Model.PostId"
+                   asp-route-title="@Model.Title"
+                   asp-route-description="@Model.Description"
+                   asp-page="./Index">
+                    Last
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+ *@

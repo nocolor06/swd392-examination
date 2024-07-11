@@ -1,10 +1,28 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home Page";
 }
+<style>
+    .images {
+        display: flex; /* Sử dụng flexbox để căn chỉnh 2 ảnh trong cùng 1 hàng */
+        width: 100%; /* Chiều rộng 100% của container chứa ảnh */
+    }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        .images img {
+            width: 100%; /* Chiếm toàn bộ chiều rộng của container */
+            height: auto;
+            border-radius: 5px;
+        }
+</style>
+
+<div class="container-fluid full-width-container">
+    <div class="row images">
+        <div class="col">
+            <img src="~/images/pexels-olly-3769151.jpg" alt="Hospital Image 1" />
+        </div>
+        <div class="col">
+            <img src="~/images/pexels-fr3nks-305568.jpg" alt="Hospital Image 2" />
+        </div>
+    </div>
 </div>

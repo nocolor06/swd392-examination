@@ -1,0 +1,74 @@
+﻿@page
+@model examination_schedule.Pages.Events.CreateModel
+@{
+    ViewData["Title"] = "Create Appointment";
+}
+
+<h1>
+    Create Appointment
+</h1>
+<hr />
+<div class="row">
+    <div class=" = col-md-6">
+        <form method="post" novalidate>
+            <div class="form-group">
+                <label asp-for="Event.DoctorId" class="control-label">Doctor</label>
+                <select asp-for="Event.DoctorId" class="form-control" asp-items="Model.Doctors"></select>
+                <span asp-validation-for="Event.DoctorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.PatientId" class="control-label">Patient</label>
+                <select asp-for="Event.PatientId" class="form-control" asp-items="Model.Patients"></select>
+                <span asp-validation-for="Event.PatientId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.StaffId" class="control-label">Staff</label>
+                <select asp-for="Event.StaffId" class="form-control" asp-items="Model.Staff"></select>
+                <span asp-validation-for="Event.StaffId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.RoomId" class="control-label">Room</label>
+                <select asp-for="Event.RoomId" class="form-control" asp-items="Model.Rooms"></select>
+                <span asp-validation-for="Event.RoomId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.TimeSlotId" class="control-label">TimeSlot</label>
+                <select asp-for="Event.TimeSlotId" class="form-control" asp-items="Model.TimeSlots"></select>
+                <span asp-validation-for="Event.TimeSlotId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.Date" class="control-label"></label>
+                <input asp-for="Event.Date" class="form-control" />
+                <span asp-validation-for="Event.Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.EventType" class="control-label"></label>
+                <input asp-for="Event.EventType" class="form-control" />
+                <span asp-validation-for="Event.EventType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.Status" class="control-label"></label>
+                <input asp-for="Event.Status" class="form-control" />
+                <span asp-validation-for="Event.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Event.Description" class="control-label"></label>
+                <textarea asp-for="Event.Description" class="form-control"></textarea>
+                <span asp-validation-for="Event.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-page="/Requests/Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

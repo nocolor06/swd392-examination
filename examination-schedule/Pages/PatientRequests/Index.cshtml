@@ -1,0 +1,81 @@
+﻿@page
+@model examination_schedule.Pages.PatientRequests.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    /* Custom CSS for table */
+    .table-bordered-custom {
+        border: 1px solid #dee2e6; /* Border thickness and color */
+        width: 100%; /* Full width */
+        border-collapse: collapse; /* Collapse border */
+    }
+
+        .table-bordered-custom th, .table-bordered-custom td {
+            border: 1px solid #dee2e6; /* Border thickness and color for cells */
+            padding: 8px; /* Padding inside cells */
+            text-align: center; /* Center align text in cells */
+        }
+</style>
+
+<h1>Patient Requests</h1>
+
+<h4>Patient: poPio</h4>
+
+<p>
+    <a asp-page="Create" class="btn btn-primary">New Request</a>
+</p>
+
+@if (Model.Events.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered-custom table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Event Type</th>
+                    <th>Status</th>
+                    <th>Description</th>
+                    <th>Doctor</th>
+                    <th>Patient</th>
+                    <th>Room</th>
+                    <th>Staff</th>
+                    <th>Time Slot</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Events)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EventType)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Status)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Doctor.Username)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Patient.Username)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Room.RoomName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Staff.Username)</td>
+                        <td>
+                        <td>
+                                @Html.DisplayFor(modelItem => item.TimeSlot.StartTime) -
+                                @Html.DisplayFor(modelItem => item.TimeSlot.EndTime)
+                        </td>
+
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.EventId" class="btn btn-sm btn-primary">Edit</a>
+                            <a asp-page="./Details" asp-route-id="@item.EventId" class="btn btn-sm btn-info">Details</a>
+                            <a asp-page="./Delete" asp-route-id="@item.EventId" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>No events found.</p>
+}

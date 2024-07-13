@@ -1,5 +1,6 @@
 using examination_schedule.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,11 +8,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 var ConnectionString = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<SWD392_ClinicScheduleContext>(option => option.UseSqlServer(ConnectionString));
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login";
+        options.LogoutPath = "/Logout";
+    });
+
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.PropertyNamingPolicy = null;
 });
-
 
 var app = builder.Build();
 
@@ -32,13 +40,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
 
-app.UseEndpoints(enpoints =>
+app.UseEndpoints(endpoints =>
 {
-    enpoints.MapGet("/", async context =>
+    endpoints.MapGet("/", async context =>
     {
         context.Response.Redirect("/Requests"); // replace with login later
     });

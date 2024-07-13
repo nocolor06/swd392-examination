@@ -309,3 +309,6 @@ SELECT * FROM Room;
 SELECT * FROM Department;
 SELECT * FROM [User];
 */
+
+select * from [Event] where [date] between '2024-07-12' and '2024-07-19'
+and [status] = 'Pending'

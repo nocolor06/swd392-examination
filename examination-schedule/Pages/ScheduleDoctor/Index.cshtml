@@ -1,0 +1,61 @@
+﻿@page
+@model examination_schedule.Pages.TimeTableDoctor.IndexModel
+@{
+}
+
+<style>
+    /* Custom CSS for table */
+    .table-bordered-custom {
+        border: 1px solid #dee2e6; /* Border thickness and color */
+        width: 100%; /* Full width */
+        border-collapse: collapse; /* Collapse border */
+    }
+
+        .table-bordered-custom th, .table-bordered-custom td {
+            border: 1px solid #dee2e6; /* Border thickness and color for cells */
+            padding: 8px; /* Padding inside cells */
+            text-align: center; /* Center align text in cells */
+        }
+</style>
+<h1>Doctor Schedule</h1>
+
+
+@if (Model.Events.Count > 0)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered-custom table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Date</th>
+                    <th>Event Type</th>
+                    <th>Description</th>
+                    <th>Patient</th>
+                    <th>Room</th>
+                    <th>Staff</th>
+                    <th>Time Slot</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Events)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Date)</td>
+                        <td>@Html.DisplayFor(modelItem => item.EventType)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Patient.Username)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Room.RoomName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Staff.Username)</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimeSlot.StartTime) -
+                            @Html.DisplayFor(modelItem => item.TimeSlot.EndTime)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <p>No events found.</p>
+}

@@ -1,3 +1,4 @@
+using System.Net.Mail;
 using examination_schedule.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -22,7 +23,7 @@ namespace examination_schedule.Pages.Requests
 
         public string DoctorId { get; set; }
 
-        public void OnGet(string from, string to, string doctorId)
+        public void OnGet(string? from, string? to, string? doctorId)
         {
             From = !string.IsNullOrEmpty(from) ? DateTime.Parse(from) : null;
             To = !string.IsNullOrEmpty(to) ? DateTime.Parse(to) : null;
@@ -44,6 +45,32 @@ namespace examination_schedule.Pages.Requests
                 && x.Status == "Pending"
             )
             .ToList();
+        }
+
+        public async void OnPost()
+        {
+            string to = "hn8319542@gmail.com";
+            string subject = "This is subject";
+            string body = "Appointment request approved.";
+            MailMessage mm = new MailMessage();
+            mm.To.Add(to);
+            mm.Subject = subject;
+            mm.Body = body;
+            mm.IsBodyHtml = false;
+            mm.From = new MailAddress("huyenntkhe170863@fpt.edu.vn");
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                UseDefaultCredentials = false,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                EnableSsl = true,
+                Credentials = new System.Net.NetworkCredential("huyenntkhe170863@fpt.edu.vn", "zhui bqes ucgy peok")
+            };
+            smtpClient.Send(mm);
+            ViewData["msg"] = "The mail has been sent";
+
+            OnGet("", "", "");
+
         }
     }
 }

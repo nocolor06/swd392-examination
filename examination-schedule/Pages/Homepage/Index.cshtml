@@ -1,0 +1,87 @@
+﻿@page
+@model examination_schedule.Pages.Homepage.HomepageModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - MyHospital</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        .card {
+            margin: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+        .card img {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <main role="main" class="container">
+       
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/images/patientmedical.jpg" class="card-img-top" alt="Patient Medical Records">
+                    <div class="card-body">
+                        <h5 class="card-title">Patient Medical Records</h5>
+                        <p class="card-text">Access and manage patient medical records efficiently and securely.</p>
+                        <a href="/PatientMedicalRecords" class="btn btn-primary">Go to Patient Medical Records</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/images/viewrequest.png" class="card-img-top" alt="View Medical Examination Requests">
+                    <div class="card-body">
+                        <h5 class="card-title">View Medical Examination Requests</h5>
+                        <p class="card-text">Review and manage requests for medical examinations quickly.</p>
+                        <a href="/Requests" class="btn btn-primary">View Examination Requests</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/images/schedule.jpg" class="card-img-top" alt="Scheduling Medical Appointments">
+                    <div class="card-body">
+                        <h5 class="card-title">Scheduling Medical Appointments</h5>
+                        <p class="card-text">Schedule appointments with doctors and specialists effortlessly.</p>
+                        <a href="/SchedulingAppointments" class="btn btn-primary">Schedule Appointments</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

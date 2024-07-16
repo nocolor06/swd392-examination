@@ -1,0 +1,84 @@
+﻿@page
+@model examination_schedule.Pages.PatientRequests.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    .form-container {
+        width: 60%; /* Độ rộng của form */
+        margin: 0 auto; /* Để hiển thị form ở giữa */
+        padding: 20px;
+        border: 1px solid #ddd; /* Đường viền */
+        border-radius: 5px; /* Bo góc */
+        background-color: #f9f9f9; /* Màu nền */
+    }
+
+        .form-container .form-group {
+            margin-bottom: 15px; /* Khoảng cách giữa các input */
+        }
+
+        .form-container label {
+            display: block; /* Hiển thị label thành dạng block để xuống dòng */
+            margin-bottom: 5px; /* Khoảng cách dưới của label */
+        }
+</style>
+
+<h1>Patient Requests</h1>
+
+<h4>Patient: poPio</h4>
+<hr />
+<div class="row">
+    <div class="col-md">
+        <div class="form-container">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Event.Doctor" class="control-label"></label>
+                    <select asp-for="Event.DoctorId" class="form-control" asp-items="ViewBag.DoctorId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Event.Patient" class="control-label"></label>
+                    <select asp-for="Event.PatientId" class="form-control" asp-items="ViewBag.PatientId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Event.Staff" class="control-label"></label>
+                    <select asp-for="Event.StaffId" class="form-control" asp-items="ViewBag.StaffId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Event.Room" class="control-label"></label>
+                    <select asp-for="Event.RoomId" class="form-control" asp-items="ViewBag.RoomId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Event.TimeSlot" class="control-label"></label>
+                    <select asp-for="Event.TimeSlotId" class="form-control" asp-items="ViewBag.TimeSlotId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Event.Date" class="control-label"></label>
+                    <input asp-for="Event.Date" class="form-control" type="date" />
+                    <span asp-validation-for="Event.Date" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Event.Description" class="control-label"></label>
+                    <textarea asp-for="Event.Description" class="form-control"></textarea>
+                    <span asp-validation-for="Event.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

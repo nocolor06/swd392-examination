@@ -30,7 +30,7 @@ namespace examination_schedule.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server =(local); database = SWD392_ClinicSchedule;uid=sa;pwd=123;Trusted_Connection=True;Encrypt=False");
+                optionsBuilder.UseSqlServer("server =LAPTOP-SK2I1UHQ\\SQLEXPRESScl; database = SWD392_ClinicSchedule;uid=sa;pwd=30102003;Trusted_Connection=True;Encrypt=False");
             }
         }
 

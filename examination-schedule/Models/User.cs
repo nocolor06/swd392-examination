@@ -25,5 +25,10 @@ namespace examination_schedule.Models
         public virtual ICollection<Doctor> Doctors { get; set; }
         public virtual ICollection<Patient> Patients { get; set; }
         public virtual ICollection<Staff> Staff { get; set; }
+
+        public string GetFullName()
+        {
+            return FirstName + " " + LastName;
+        }
     }
 }

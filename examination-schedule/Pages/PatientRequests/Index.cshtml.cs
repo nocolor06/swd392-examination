@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using examination_schedule.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace examination_schedule.Pages.PatientRequests
 {
@@ -32,5 +34,23 @@ namespace examination_schedule.Pages.PatientRequests
                     .ToListAsync();
             }
         }
+        public async Task<IActionResult> OnPostDeleteEventAsync(int? id)
+        {
+            if (id == null || _context.Events == null)
+            {
+                return NotFound();
+            }
+
+            var eventToDelete = await _context.Events.FindAsync(id);
+
+            if (eventToDelete != null)
+            {
+                _context.Events.Remove(eventToDelete);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToPage("./Index");
+        }
+
     }
 }

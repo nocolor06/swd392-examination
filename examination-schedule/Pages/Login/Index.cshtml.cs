@@ -43,7 +43,7 @@ namespace examination_schedule.Pages.Login
 
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity));
 
-                    return RedirectToPage("/Homepage/Homepage");
+                    return RedirectToPage("/Homepage/Index");
                 }
                 else
                 {

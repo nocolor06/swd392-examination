@@ -18,7 +18,25 @@
         }
 </style>
 <h1>Doctor Schedule</h1>
-
+<div>
+    <form method="get">
+        <label>From</label>
+        <input type="date" name="from" value="" />
+        <label>To</label>
+        <input type="date" name="to" value="" />
+        <label>Doctor ID</label>
+        @* <input type="text" name="doctorId" value="" /> *@
+        @* <select class="form-control" asp-items="Model.Doctors"></select> *@
+        <select id="doctorId" name="doctorId" class="form-control">
+            <option value="">-- Select Doctor --</option>
+            @foreach (var doctor in Model.Doctors)
+            {
+                <option value="@doctor.Value">@doctor.Text</option>
+            }
+        </select>
+        <button type="submit" asp-page="./Index">Submit</button>
+    </form>
+</div>
 
 @if (Model.Events.Count > 0)
 {
@@ -32,6 +50,7 @@
                     <th>Patient</th>
                     <th>Room</th>
                     <th>Staff</th>
+                    <th>Doctor</th>
                     <th>Time Slot</th>
                 </tr>
             </thead>
@@ -42,9 +61,10 @@
                         <td>@Html.DisplayFor(modelItem => item.Date)</td>
                         <td>@Html.DisplayFor(modelItem => item.EventType)</td>
                         <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Patient.Username)</td>
+                        <td>@item.Patient.UsernameNavigation.FirstName @item.Patient.UsernameNavigation.LastName</td>
                         <td>@Html.DisplayFor(modelItem => item.Room.RoomName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Staff.Username)</td>
+                        <td>@item.Staff.UsernameNavigation.FirstName @item.Staff.UsernameNavigation.LastName</td>
+                        <td>@item.Doctor.UsernameNavigation.FirstName @item.Doctor.UsernameNavigation.LastName</td>
                         <td>
                             @Html.DisplayFor(modelItem => item.TimeSlot.StartTime) -
                             @Html.DisplayFor(modelItem => item.TimeSlot.EndTime)
